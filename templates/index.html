@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judgment Classifier</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f0f4f8;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+            --primary-accent: #3498db;
+            --secondary-accent: #2980b9;
+            --border-color: #ecf0f1;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode {
+            --bg-color: #2c3e50;
+            --card-bg: #34495e;
+            --text-color: #ecf0f1;
+            --primary-accent: #5e95db;
+            --secondary-accent: #4a84b9;
+            --border-color: #44586d;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            transition: background-color 0.5s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: transform 0.2s ease-in-out;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .main-container {
+            background-color: var(--card-bg);
+            border-radius: 2rem;
+            box-shadow: 0 15px 40px var(--shadow-color);
+            transition: all 0.5s ease-in-out;
+            padding: 3rem;
+            width: 100%;
+            max-width: 55rem;
+            animation: fadeIn 0.8s ease-in-out;
+            position: relative;
+        }
+
+        h1, h2, h3, label, p {
+            color: var(--text-color);
+            transition: color 0.5s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        label {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        textarea, input[type="file"] {
+            border-radius: 1rem;
+            transition: all 0.3s ease-in-out;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            padding: 1rem;
+        }
+
+        textarea:focus, input[type="file"]:focus {
+            outline: none;
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.3);
+        }
+
+        .or-divider {
+            color: var(--text-color);
+            opacity: 0.5;
+            font-weight: 500;
+        }
+
+        .or-divider span {
+            background-color: var(--border-color);
+            height: 2px;
+            transition: background-color 0.5s ease-in-out;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            color: white;
+            border-radius: 1.25rem;
+            padding: 1.25rem 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .submit-button[disabled] {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .result-section {
+            border-top: 2px dashed var(--border-color);
+            padding-top: 2rem;
+            margin-top: 2rem;
+            animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .list-item {
+            background-color: var(--bg-color);
+            border-radius: 1.25rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease-in-out;
+            padding: 1.5rem;
+        }
+        .list-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .list-item p {
+            word-wrap: break-word;
+            margin-bottom: 0.5rem;
+        }
+
+        .list-item p b {
+            font-weight: 700;
+            margin-right: 0.5rem;
+            white-space: nowrap;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .main-container {
+                padding: 1.5rem;
+                border-radius: 1.5rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            label {
+                font-size: 1rem;
+            }
+            .list-item {
+                padding: 1rem;
+            }
+            .list-item p b {
+                display: block;
+                margin-bottom: 0.2rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <button id="theme-toggle" class="theme-toggle">🌙</button>
+
+    <div class="max-w-3xl mx-auto main-container">
+        <h1 class="text-center mb-6">⚖️ Judgment Classifier</h1>
+
+        <form action="/" method="post" enctype="multipart/form-data" class="space-y-6">
+
+            <div>
+                <label class="block text-lg mb-2">✍️ Enter Judgment Text:</label>
+                <textarea name="text_input" rows="6" 
+                    class="w-full focus:ring"
+                    placeholder="Paste judgment text here..."></textarea>
+            </div>
+
+            <div class="flex items-center justify-center font-semibold or-divider">
+                <span class="border-t w-1/4"></span>
+                <span class="px-4">OR</span>
+                <span class="border-t w-1/4"></span>
+            </div>
+
+            <div>
+                <label class="block text-lg mb-2">📄 Upload Judgment PDF:</label>
+                <input type="file" name="file" accept="application/pdf" 
+                    class="block w-full">
+            </div>
+
+            <button type="submit" 
+                class="w-full text-lg submit-button">
+                Analyze
+            </button>
+        </form>
+
+        {% if category %}
+        <div class="result-section">
+            <h2 class="text-xl font-semibold mt-6">
+                🧾 Predicted Category: <span class="font-bold">{{ category }}</span>
+            </h2>
+        </div>
+        {% endif %}
+
+        {% if results %}
+        <div class="result-section">
+            <h3 class="text-lg font-bold mb-4">🔍 Top 5 Similar Judgments</h3>
+            <ul>
+                {% for r in results %}
+                <li class="mb-4 list-item">
+                    <p class="mb-2"><b>📄 Case:</b> {{ r.case }}</p>
+                    <p class="mb-2"><b>🔗 Score:</b> {{ "%.4f"|format(r.score) }}</p>
+                    <p><b>📝 Preview:</b> {{ r.preview }}...</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            const textInput = document.querySelector('textarea[name="text_input"]');
+            const fileInput = document.querySelector('input[name="file"]');
+            const submitButton = document.querySelector('button[type="submit"]');
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            const updateButtonState = () => {
+                const isTextFilled = textInput.value.trim() !== '';
+                const isFileSelected = fileInput.files.length > 0;
+                
+                if (isTextFilled || isFileSelected) {
+                    submitButton.removeAttribute('disabled');
+                    submitButton.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                } else {
+                    submitButton.setAttribute('disabled', 'true');
+                    submitButton.classList.add('bg-gray-400', 'cursor-not-allowed');
+                }
+            };
+
+            const handleFormSubmission = () => {
+                submitButton.innerHTML = `<svg class="animate-spin h-5 w-5 mr-3 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg> Analyzing...`;
+                submitButton.setAttribute('disabled', 'true');
+                submitButton.classList.add('opacity-75', 'cursor-wait');
+            };
+
+            const handleInput = (event) => {
+                if (event.target === textInput) {
+                    if (textInput.value.trim() !== '') {
+                        fileInput.value = '';
+                    }
+                } else if (event.target === fileInput) {
+                    if (fileInput.files.length > 0) {
+                        textInput.value = '';
+                    }
+                }
+                updateButtonState();
+            };
+            
+            const toggleTheme = () => {
+                body.classList.toggle('dark-mode');
+                const isDarkMode = body.classList.contains('dark-mode');
+                themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            };
+
+            const loadTheme = () => {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    body.classList.add('dark-mode');
+                    themeToggle.textContent = '☀️';
+                } else {
+                    themeToggle.textContent = '🌙';
+                }
+            };
+
+            textInput.addEventListener('input', handleInput);
+            fileInput.addEventListener('change', handleInput);
+            form.addEventListener('submit', handleFormSubmission);
+            themeToggle.addEventListener('click', toggleTheme);
+            
+            loadTheme();
+            updateButtonState();
+        });
+    </script>
+</body>
+</html>
