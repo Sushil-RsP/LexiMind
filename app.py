@@ -126,5 +126,9 @@ def handle_over_max(e):
     return "Uploaded file is too large. Max size allowed is 10 MB.", 413
 
 # -------- Run ----------
+'''if __name__ == "__main__":
+    app.run(debug=True)'''
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 7860))  # HF Spaces uses PORT env variable
+    app.run(host="0.0.0.0", port=port)
