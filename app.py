@@ -57,7 +57,7 @@ judgment_texts = download_and_load("1vAA2spJ-AzHhBqs-gl6gL5_wDk22a5VW", "judgmen
 model = download_and_load("1-pje6HUuprf19yGIbJQA7MNwPNGqTkF0", "model.pkl")
 case_names = download_and_load("1_IZQmTuucallXvQaeLM8P9q0co79_JD6", "case_names.pkl")
 embeddings = download_and_load("1molCaZLasdsSMqqskRIcHnmnpQWfAupF", "embeddings.pkl")
-modellog = download_and_load("1XALJYnXhZB9gXdjAgz8y_I852CpYt-eg", "modellog.pkl")
+modellog = download_and_load("1XALJYnXhZB9gXdjAgj8y_I852CpYt-eg", "modellog.pkl")
 
 # -------- Routes ----------
 @app.route("/", methods=["GET", "POST"])
