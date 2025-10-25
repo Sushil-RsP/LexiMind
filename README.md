@@ -99,19 +99,5 @@ embeddings.pkl: Pre-computed embeddings of the judgment texts.
 
 modellog.pkl: The pre-trained classification model.
 
-Note: All of the .pkl files are custom-built artifacts. They were generated from a separate data processing and model training pipeline, and they contain the data and trained models that power this application.
-=======
----
-title: 'LexiMind '
-emoji: 🐨
-colorFrom: gray
-colorTo: yellow
-sdk: gradio
-sdk_version: 5.49.1
-app_file: app.py
-pinned: false
-short_description: 'give top 5 similar case judgement '
----
+**You can download all pkl files by run model.ipynb but first you need to dowanload database from my drive**
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
->>>>>>> 29e47f3b369243fc8e1698303b36f12838ea40dd
