@@ -99,5 +99,5 @@ embeddings.pkl: Pre-computed embeddings of the judgment texts.
 
 modellog.pkl: The pre-trained classification model.
 
-**You can download all pkl files by run model.ipynb but first you need to dowanload database from my drive**
+# You can download all pkl files by run model.ipynb but first you need to dowanload database from my drive
 
