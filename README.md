@@ -1,11 +1,10 @@
-<<<<<<< HEAD
 🧠 LexiMind: Legal Document Analysis Engine
 
 [Download 1950_data.zip](https://drive.google.com/file/d/1srTT31jDVDEEqya8iFTNAB67MVS7DZz-/view?usp=sharing)
 
 [LexiMind](https://huggingface.co/spaces/Sushil-RsP/LexiMind_)
 
-[![LexiMind Screenshot](SScreenshot%202025-10-30%20195936.png)](https://huggingface.co/spaces/Sushil-RsP/LexiMind_)
+[![LexiMind Screenshot](Screenshot%202025-10-30%20195936.png)](https://huggingface.co/spaces/Sushil-RsP/LexiMind_)
 
 LexiMind is a powerful web application built with Flask that performs intelligent analysis on legal documents. Users can either paste text or upload a PDF of a legal judgment to receive an AI-powered classification and find semantically similar cases from a database.
 
